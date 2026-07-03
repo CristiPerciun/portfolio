@@ -1,0 +1,137 @@
+---
+const jobs = [
+  {
+    period: '12/2024 — oggi',
+    role: 'Software Developer · Mobile & Desktop',
+    company: 'Custom S.p.A. — Parma',
+    accent: 'acid',
+    points: [
+      'InventaOne — gestionale POS in Flutter su 4 piattaforme (Windows, Android, iOS, Linux) da un unico codebase: vendita, sala/tavoli, FatturaPA/SdI e dashboard con interrogazioni di vendita AI (Gemini).',
+      'Architettura offline-first: Drift/SQLite con migrazioni versionate, server HTTP locale con TLS e certificate pinning, messaggistica MQTT — il punto cassa lavora anche senza rete.',
+      'dartpos — SDK Flutter che integra 4 famiglie di periferiche di cassa (stampanti fiscali/ESC-POS, EFT-POS, cash keeper, display cliente) su un trasporto astratto seriale/Ethernet/USB.',
+      'Qualità e rilascio automatizzati: Jenkins + SonarQube, MSIX offuscato, .deb firmato, test end-to-end Appium, logging riutilizzabile con code persistenti e retry.',
+    ],
+  },
+  {
+    period: '09/2022 — 12/2023',
+    role: 'Sviluppatore Software',
+    company: 'Custom S.p.A. — Parma',
+    accent: 'cyan',
+    points: [
+      'Sviluppo e manutenzione delle app Android native KeepUp Smart e KeepUp Order (Java, build multi-flavor, ProGuard) per vendita e ristorazione.',
+      'Test UI automatici con Espresso integrati in TestRail; ciclo di reporting automatizzato in CI (Jenkins, Silk, notifiche Telegram).',
+      'API REST e job CRON in PHP sulla piattaforma cloud aziendale — fatturazione elettronica, telemetria dispositivi, licensing — su MySQL e SQL Server.',
+    ],
+  },
+  {
+    period: '09/2018 — 09/2022',
+    role: 'Testing Software & Firmware',
+    company: 'Custom S.p.A. — Parma',
+    accent: 'vio',
+    points: [
+      'Verifica di integrità e qualità di firmware e software dei dispositivi fiscali; gestione delle release sui portali ufficiali.',
+      'Supporto tecnico di 3° livello sui casi critici: dall\'analisi delle cause agli interventi correttivi diretti sul codice di prodotto.',
+    ],
+  },
+  {
+    period: '06/2016',
+    role: 'Stage estivo — Laboratorio informatico',
+    company: 'Protec S.r.l. — Parma',
+    accent: 'dim',
+    points: ['Supporto allo sviluppo e alla gestione del software di laboratorio.'],
+  },
+];
+---
+
+<section id="esperienza" class="relative mx-auto max-w-4xl px-6 py-28">
+  <p class="section-tag">changelog</p>
+  <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">
+    Esperienza<span class="text-acid">.</span>
+  </h2>
+
+  <div class="relative mt-16 pl-8 sm:pl-12">
+    <!-- track + progress line -->
+    <div class="absolute top-0 bottom-0 left-[7px] w-px bg-line sm:left-[11px]" aria-hidden="true"></div>
+    <div id="tl-progress" class="absolute top-0 left-[7px] w-px origin-top bg-gradient-to-b from-acid via-cyber to-vio sm:left-[11px]" style="height: 100%; transform: scaleY(0); box-shadow: 0 0 12px rgba(0,229,255,0.5);" aria-hidden="true"></div>
+
+    <ol class="space-y-16">
+      {
+        jobs.map((j) => (
+          <li class="tl-item relative">
+            <span class={`tl-dot tl-dot--${j.accent}`} aria-hidden="true" />
+            <p class="font-mono text-xs tracking-[0.2em] text-dim">{j.period}</p>
+            <h3 class="mt-2 text-xl font-bold sm:text-2xl">{j.role}</h3>
+            <p class="mt-1 font-mono text-sm text-cyber">{j.company}</p>
+            <ul class="mt-4 space-y-2.5">
+              {j.points.map((p) => (
+                <li class="flex gap-3 text-sm leading-relaxed text-dim">
+                  <span class="mt-0.5 font-mono text-acid">▹</span>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .tl-dot {
+    position: absolute;
+    left: -33px;
+    top: 4px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--color-void);
+    border: 2px solid var(--color-dim);
+  }
+
+  @media (min-width: 640px) {
+    .tl-dot { left: -37px; }
+  }
+
+  .tl-dot--acid { border-color: var(--color-acid); box-shadow: 0 0 10px rgba(163, 255, 18, 0.6); }
+  .tl-dot--cyan { border-color: var(--color-cyber); box-shadow: 0 0 10px rgba(0, 229, 255, 0.6); }
+  .tl-dot--vio { border-color: var(--color-vio); box-shadow: 0 0 10px rgba(139, 92, 246, 0.6); }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reduced) {
+    gsap.to('#tl-progress', {
+      scaleY: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#esperienza',
+        start: 'top 60%',
+        end: 'bottom 70%',
+        scrub: 0.6,
+      },
+    });
+
+    gsap.utils.toArray<HTMLElement>('.tl-item').forEach((item) => {
+      gsap.from(item, {
+        y: 48,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 82%',
+        },
+      });
+    });
+  } else {
+    const p = document.getElementById('tl-progress');
+    if (p) p.style.transform = 'scaleY(1)';
+  }
+</script>

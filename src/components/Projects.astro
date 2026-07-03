@@ -1,0 +1,130 @@
+---
+const projects = [
+  {
+    name: 'FitAI Analyzer',
+    sub: '+ garmin-sync-server',
+    accent: 'cyan',
+    ascii: '▲▲ ♥ 142bpm',
+    desc: 'Piattaforma fitness con AI: converte i dati Garmin/Strava in obiettivi giornalieri generati da LLM. Firma OAuth1 HMAC-SHA1 implementata a mano con gestione MFA, sync delta incrementale e strategia dati Firestore a 3 livelli per ridurre i costi dei prompt.',
+    stack: ['Flutter', 'Riverpod', 'Firebase', 'FastAPI', 'Docker', 'Raspberry Pi', 'GitHub Actions', 'PWA'],
+    link: 'https://github.com/CristiPerciun',
+  },
+  {
+    name: 'Automazione AI',
+    sub: 'contenuti generativi',
+    accent: 'acid',
+    ascii: '🎬 render --agents=5',
+    desc: 'Pipeline multi-agente che genera video e contenuti social con approvazione umana prima della pubblicazione: scripting LLM a ruoli specializzati, sintesi vocale, immagini generative e publishing via Meta Graph API.',
+    stack: ['Flutter desktop', 'Python', 'Gemini/Ollama', 'TTS Kokoro', 'FFmpeg', 'Isar/Hive'],
+    link: 'https://github.com/CristiPerciun',
+  },
+  {
+    name: 'MisuraPerfetta',
+    sub: 'cartamodelli parametrici',
+    accent: 'vio',
+    ascii: '✂ 92·74·98 → PDF',
+    desc: 'Motore di calcolo parametrico che trasforma le misure corporee in cartamodelli sartoriali, con export/stampa PDF e anteprima 3D. Drift compilato su WebAssembly per il funzionamento full-web.',
+    stack: ['Flutter Web/Windows', 'Drift su WASM', 'pdf/printing'],
+    link: 'https://github.com/CristiPerciun',
+  },
+];
+---
+
+<section id="progetti" class="relative mx-auto max-w-6xl px-6 py-28">
+  <p class="section-tag">side_projects</p>
+  <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">
+    Progetti personali<span class="text-vio">.</span>
+  </h2>
+  <p class="mt-4 max-w-2xl text-sm text-dim">
+    End-to-end: ideati, sviluppati e pubblicati in autonomia —
+    <a href="https://github.com/CristiPerciun" target="_blank" rel="noopener" class="font-mono text-cyber hover:underline">github.com/CristiPerciun</a>
+  </p>
+
+  <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3" style="perspective: 1200px;">
+    {
+      projects.map((p) => (
+        <a
+          href={p.link}
+          target="_blank"
+          rel="noopener"
+          class={`tilt-card tilt--${p.accent} group relative block border border-line bg-panel p-6 transition-[border-color] duration-300`}
+        >
+          <div class="glare pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
+          <div class="relative" style="transform: translateZ(30px);">
+            <p class="holo-screen flex h-24 items-center justify-center border border-line bg-void font-mono text-sm text-dim">
+              {p.ascii}
+            </p>
+            <h3 class="mt-5 text-xl font-bold">{p.name}</h3>
+            <p class="font-mono text-xs text-dim">{p.sub}</p>
+            <p class="mt-3 text-sm leading-relaxed text-dim">{p.desc}</p>
+            <ul class="mt-4 flex flex-wrap gap-1.5">
+              {p.stack.map((s) => (
+                <li class="border border-line px-2 py-0.5 font-mono text-[10px] text-dim">{s}</li>
+              ))}
+            </ul>
+            <p class="mt-5 font-mono text-xs text-cyber opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              → open_source(github)
+            </p>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .tilt-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .tilt--cyan:hover { border-color: rgba(0, 229, 255, 0.5); box-shadow: 0 24px 60px -24px rgba(0, 229, 255, 0.25); }
+  .tilt--acid:hover { border-color: rgba(163, 255, 18, 0.5); box-shadow: 0 24px 60px -24px rgba(163, 255, 18, 0.25); }
+  .tilt--vio:hover { border-color: rgba(139, 92, 246, 0.55); box-shadow: 0 24px 60px -24px rgba(139, 92, 246, 0.3); }
+
+  .glare {
+    background: radial-gradient(
+      circle 220px at var(--gx, 50%) var(--gy, 50%),
+      rgba(255, 255, 255, 0.08),
+      transparent 70%
+    );
+  }
+
+  .holo-screen {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0 3px,
+      rgba(255, 255, 255, 0.02) 3px 4px
+    );
+  }
+</style>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (!reduced && fine) {
+    document.querySelectorAll<HTMLElement>('.tilt-card').forEach((card) => {
+      let raf = 0;
+
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width - 0.5;
+        const ny = (e.clientY - r.top) / r.height - 0.5;
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          card.style.transform = `rotateY(${nx * 14}deg) rotateX(${ny * -12}deg) translateZ(0)`;
+          card.style.setProperty('--gx', `${(nx + 0.5) * 100}%`);
+          card.style.setProperty('--gy', `${(ny + 0.5) * 100}%`);
+        });
+      });
+
+      card.addEventListener('pointerleave', () => {
+        cancelAnimationFrame(raf);
+        card.style.transition = 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)';
+        card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        setTimeout(() => (card.style.transition = ''), 500);
+      });
+    });
+  }
+</script>

@@ -1,0 +1,119 @@
+---
+const cells = [
+  {
+    id: '01',
+    title: 'Mobile & Cross-Platform',
+    accent: 'cyan',
+    span: 'md:col-span-2 md:row-span-2',
+    desc: 'Un unico codebase, 6 piattaforme: Android, iOS, Web/PWA, Windows, Linux, macOS.',
+    tags: ['Flutter', 'Dart', 'Riverpod', 'go_router', 'Drift/SQLite', 'Isar', 'MethodChannel', 'Kotlin/Swift/C++', 'Java Android', 'Material 3'],
+  },
+  {
+    id: '02',
+    title: 'AI / LLM',
+    accent: 'acid',
+    span: 'md:col-span-2',
+    desc: 'Layer multi-provider, prompt engineering, orchestrazione multi-agente, TTS e media generativi.',
+    tags: ['Gemini', 'DeepSeek', 'OpenRouter', 'Ollama', 'multi-agent'],
+  },
+  {
+    id: '03',
+    title: 'Fiscale & Hardware POS',
+    accent: 'vio',
+    span: 'md:col-span-2',
+    desc: 'Dal protocollo seriale alla conformità normativa italiana.',
+    tags: ['FatturaPA/SdI', 'Registratore Telematico', 'ESC-POS', 'EFT-POS', 'cash keeper', 'RS232/TCP/USB', 'MQTT'],
+  },
+  {
+    id: '04',
+    title: 'Backend & Database',
+    accent: 'cyan',
+    span: 'md:col-span-1',
+    desc: '',
+    tags: ['Python/FastAPI', 'PHP', 'Node/TS', 'C#/.NET', 'SQL Server', 'MySQL', 'Redis', 'Firebase', 'Supabase'],
+  },
+  {
+    id: '05',
+    title: 'DevOps & Testing',
+    accent: 'acid',
+    span: 'md:col-span-2',
+    desc: 'CI/CD end-to-end: build firmata, quality gate, test automatici.',
+    tags: ['Jenkins', 'SonarQube', 'GitHub Actions', 'Docker', 'MSIX/.deb/APK', 'Appium', 'Espresso', 'TestRail'],
+  },
+  {
+    id: '06',
+    title: 'Sicurezza & OAuth',
+    accent: 'vio',
+    span: 'md:col-span-1',
+    desc: '',
+    tags: ['OAuth1 HMAC-SHA1', 'OAuth2', 'CAS', 'MFA/2FA', 'cert pinning', 'secure storage'],
+  },
+];
+---
+
+<section id="skills" class="relative mx-auto max-w-6xl px-6 py-28">
+  <p class="section-tag">skill_matrix</p>
+  <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">
+    Competenze<span class="text-cyber">.</span>
+  </h2>
+
+  <div class="reveal mt-12 grid grid-cols-1 gap-4 md:grid-cols-4" data-reveal-stagger>
+    {
+      cells.map((c) => (
+        <article class={`bento bento--${c.accent} ${c.span} group relative overflow-hidden border border-line bg-panel p-6`}>
+          <div class="bento-glow" aria-hidden="true" />
+          <header class="flex items-baseline justify-between gap-4">
+            <h3 class="text-lg font-bold">{c.title}</h3>
+            <span class="font-mono text-[10px] tracking-[0.3em] text-dim">[{c.id}]</span>
+          </header>
+          {c.desc && <p class="mt-3 text-sm leading-relaxed text-dim">{c.desc}</p>}
+          <ul class="mt-4 flex flex-wrap gap-1.5">
+            {c.tags.map((t) => (
+              <li class="tag border border-line px-2 py-0.5 font-mono text-[11px] text-dim transition-colors">{t}</li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .bento {
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  .bento:hover {
+    transform: translateY(-2px);
+  }
+
+  .bento-glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.35s;
+    pointer-events: none;
+  }
+
+  .bento:hover .bento-glow {
+    opacity: 1;
+  }
+
+  .bento--cyan:hover { border-color: rgba(0, 229, 255, 0.5); }
+  .bento--cyan .bento-glow {
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 229, 255, 0.1), transparent 70%);
+  }
+  .bento--cyan:hover .tag { border-color: rgba(0, 229, 255, 0.3); color: #bfeef7; }
+
+  .bento--acid:hover { border-color: rgba(163, 255, 18, 0.5); }
+  .bento--acid .bento-glow {
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(163, 255, 18, 0.1), transparent 70%);
+  }
+  .bento--acid:hover .tag { border-color: rgba(163, 255, 18, 0.3); color: #dbf7b0; }
+
+  .bento--vio:hover { border-color: rgba(139, 92, 246, 0.55); }
+  .bento--vio .bento-glow {
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(139, 92, 246, 0.14), transparent 70%);
+  }
+  .bento--vio:hover .tag { border-color: rgba(139, 92, 246, 0.35); color: #d6c6fb; }
+</style>

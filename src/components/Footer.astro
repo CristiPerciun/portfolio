@@ -1,0 +1,86 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const cvUrl = `${base}/cv/Cristian_Perciun_Flutter_Developer_CV_IT.pdf`;
+---
+
+<footer id="contatti" data-cv={cvUrl} class="relative mx-auto max-w-4xl px-6 pt-28 pb-16">
+  <p class="section-tag">shutdown_sequence</p>
+  <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">
+    Contatti<span class="text-cyber">.</span>
+  </h2>
+
+  <div class="terminal mt-12 overflow-hidden border border-line bg-[#050508]">
+    <div class="flex items-center gap-2 border-b border-line px-4 py-2.5">
+      <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
+      <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
+      <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+      <span class="ml-3 font-mono text-xs text-dim">perciun_os — tty01 — 80×24</span>
+    </div>
+
+    <div id="term-body" class="min-h-[300px] px-5 py-4 font-mono text-sm leading-7">
+      <noscript>
+        <p>github: <a class="text-cyber" href="https://github.com/CristiPerciun">github.com/CristiPerciun</a></p>
+        <p>email: <a class="text-cyber" href="mailto:cristi.perciun@gmail.com">cristi.perciun@gmail.com</a></p>
+      </noscript>
+    </div>
+  </div>
+
+  <p class="mt-10 text-center font-mono text-[11px] tracking-widest text-dim">
+    © 2026 CRISTIAN PERCIUN · BUILT WITH ASTRO + TAILWIND + GSAP · PARMA, IT
+  </p>
+</footer>
+
+<script>
+  const body = document.getElementById('term-body')!;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  type Line = { html: string; cls?: string; delay?: number };
+
+  const LINES: Line[] = [
+    { html: '<span class="text-acid">cristian@perciun_os</span>:<span class="text-cyber">~</span>$ whoami', delay: 300 },
+    { html: 'cristian.perciun — senior flutter / full-stack developer' },
+    { html: '<span class="text-acid">cristian@perciun_os</span>:<span class="text-cyber">~</span>$ contact --list', delay: 500 },
+    { html: '&nbsp;&nbsp;github &nbsp;→ <a href="https://github.com/CristiPerciun" target="_blank" rel="noopener" class="text-cyber underline decoration-dotted hover:text-acid">github.com/CristiPerciun</a>' },
+    { html: '&nbsp;&nbsp;email &nbsp;&nbsp;→ <a href="mailto:cristi.perciun@gmail.com" class="text-cyber underline decoration-dotted hover:text-acid">cristi.perciun@gmail.com</a>' },
+    { html: '&nbsp;&nbsp;luogo &nbsp;&nbsp;→ Parma, Italia (+39 339 2570045)' },
+    { html: '<span class="text-acid">cristian@perciun_os</span>:<span class="text-cyber">~</span>$ cv --download', delay: 500 },
+    { html: `&nbsp;&nbsp;⬇ <a href="__CV__" download class="text-acid underline decoration-dotted hover:text-cyber">Cristian_Perciun_CV_IT.pdf</a> [525 KB] .......... 100%` },
+    { html: '<span class="text-acid">cristian@perciun_os</span>:<span class="text-cyber">~</span>$ shutdown -h now', delay: 700 },
+    { html: '<span class="text-dim">[ OK ] Reached target Power-Off. A presto.</span>', cls: 'opacity-70' },
+  ];
+
+  const cvUrl = document.getElementById('contatti')?.getAttribute('data-cv') ?? '';
+
+  const render = (upTo: number) => {
+    body.innerHTML = LINES.slice(0, upTo)
+      .map((l) => `<p class="${l.cls ?? ''}">${l.html.replace('__CV__', cvUrl)}</p>`)
+      .join('');
+    if (upTo < LINES.length) {
+      body.innerHTML += '<p><span class="cursor-blink"></span></p>';
+    } else {
+      body.innerHTML += '<p><span class="text-acid">cristian@perciun_os</span>:<span class="text-cyber">~</span>$ <span class="cursor-blink"></span></p>';
+    }
+  };
+
+  if (reduced) {
+    render(LINES.length);
+  } else {
+    let started = false;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting || started) return;
+        started = true;
+        io.disconnect();
+        let i = 0;
+        const next = () => {
+          i++;
+          render(i);
+          if (i < LINES.length) setTimeout(next, LINES[i].delay ?? 220);
+        };
+        setTimeout(next, 400);
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(body);
+  }
+</script>

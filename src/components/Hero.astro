@@ -1,0 +1,546 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const cvUrl = `${base}/cv/Cristian_Perciun_Flutter_Developer_CV_IT.pdf`;
+---
+
+<section id="hero" class="relative min-h-screen overflow-hidden">
+  <!-- flashlight glow that follows the pointer across the whole hero -->
+  <div class="torch" aria-hidden="true"></div>
+
+  <div
+    class="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 pt-28 pb-16 lg:grid-cols-[1.1fr_1fr] lg:pt-0 lg:min-h-screen"
+  >
+    <!-- ============ left: copy ============ -->
+    <div>
+      <p class="font-mono text-xs tracking-[0.3em] text-acid uppercase">
+        <span class="text-dim">$</span> boot: perciun_os --profile
+      </p>
+
+      <h1 class="mt-5 text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
+        Cristian<br />Perciun<span class="text-acid">_</span>
+      </h1>
+
+      <p class="mt-6 h-8 font-mono text-base text-cyber sm:text-lg">
+        <span class="text-dim">&gt;</span>
+        <span id="typing"></span><span class="cursor-blink" aria-hidden="true"></span>
+      </p>
+
+      <p class="mt-6 max-w-xl text-base leading-relaxed text-dim">
+        7+ anni in <span class="text-ink">Custom S.p.A.</span> nel dominio POS/fiscale.
+        Porto un prodotto dall'idea al rilascio: dal driver seriale della stampante fiscale
+        alla pipeline CI/CD, con architetture <span class="text-ink">offline-first</span>
+        su 6 piattaforme e integrazioni <span class="text-ink">AI/LLM</span>.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="#progetti" class="neon-btn" data-glitch>[ VEDI_PROGETTI ]</a>
+        <a href="#contatti" class="neon-btn neon-btn--cyan" data-glitch>[ CONTATTAMI ]</a>
+      </div>
+
+      <dl class="mt-12 grid grid-cols-2 gap-x-8 gap-y-4 font-mono text-sm sm:grid-cols-4">
+        <div>
+          <dt class="text-[10px] tracking-widest text-dim uppercase">Anni exp</dt>
+          <dd class="mt-1 text-2xl font-bold text-acid">7+</dd>
+        </div>
+        <div>
+          <dt class="text-[10px] tracking-widest text-dim uppercase">Piattaforme</dt>
+          <dd class="mt-1 text-2xl font-bold text-cyber">6</dd>
+        </div>
+        <div>
+          <dt class="text-[10px] tracking-widest text-dim uppercase">Periferiche POS</dt>
+          <dd class="mt-1 text-2xl font-bold text-vio">4</dd>
+        </div>
+        <div>
+          <dt class="text-[10px] tracking-widest text-dim uppercase">Side project</dt>
+          <dd class="mt-1 text-2xl font-bold text-ink">3</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- ============ right: x-ray stage ============ -->
+    <div class="relative mx-auto w-full max-w-[440px]">
+      <div id="stage" class="stage relative w-full select-none" style="aspect-ratio: 600 / 700;">
+        <!-- UNDER layer: neon circuits, revealed by the torch mask -->
+        <div class="layer-under absolute inset-0" aria-hidden="true">
+          <svg viewBox="0 0 600 700" class="h-full w-full" fill="none">
+            <defs>
+              <filter id="neon-glow" x="-40%" y="-40%" width="180%" height="180%">
+                <feGaussianBlur stdDeviation="4" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" /><feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <clipPath id="screen-clip"><rect x="200" y="155" width="200" height="120" rx="8" /></clipPath>
+            </defs>
+
+            <!-- circuit traces radiating from the chip -->
+            <g stroke="#8b5cf6" stroke-width="1.5" opacity="0.85" class="traces">
+              <path d="M140 170 H80 V90 H30" />
+              <path d="M140 250 H60 V330" />
+              <path d="M140 410 H90 V560 H40" />
+              <path d="M460 190 H530 V80 H580" />
+              <path d="M460 330 H545 V450" />
+              <path d="M460 490 H520 V620 H575" />
+              <path d="M300 80 V30" />
+              <path d="M260 620 V680 H180" />
+              <path d="M340 620 V665 H430" />
+            </g>
+            <g fill="#8b5cf6" class="nodes">
+              <circle cx="30" cy="90" r="4" /><circle cx="60" cy="330" r="4" />
+              <circle cx="40" cy="560" r="4" /><circle cx="580" cy="80" r="4" />
+              <circle cx="545" cy="450" r="4" /><circle cx="575" cy="620" r="4" />
+              <circle cx="300" cy="30" r="4" /><circle cx="180" cy="680" r="4" />
+              <circle cx="430" cy="665" r="4" />
+            </g>
+
+            <!-- chip / terminal body -->
+            <rect x="160" y="110" width="280" height="440" rx="26" stroke="#00e5ff" stroke-width="2" filter="url(#neon-glow)" />
+            <rect x="278" y="78" width="44" height="32" rx="6" stroke="#00e5ff" stroke-width="1.5" />
+
+            <!-- pins -->
+            <g fill="#a3ff12" opacity="0.9">
+              <rect x="138" y="150" width="22" height="9" rx="2" /><rect x="138" y="190" width="22" height="9" rx="2" />
+              <rect x="138" y="230" width="22" height="9" rx="2" /><rect x="138" y="270" width="22" height="9" rx="2" />
+              <rect x="138" y="390" width="22" height="9" rx="2" /><rect x="138" y="430" width="22" height="9" rx="2" />
+              <rect x="138" y="470" width="22" height="9" rx="2" /><rect x="138" y="510" width="22" height="9" rx="2" />
+              <rect x="440" y="150" width="22" height="9" rx="2" /><rect x="440" y="190" width="22" height="9" rx="2" />
+              <rect x="440" y="230" width="22" height="9" rx="2" /><rect x="440" y="270" width="22" height="9" rx="2" />
+              <rect x="440" y="390" width="22" height="9" rx="2" /><rect x="440" y="430" width="22" height="9" rx="2" />
+              <rect x="440" y="470" width="22" height="9" rx="2" /><rect x="440" y="510" width="22" height="9" rx="2" />
+            </g>
+
+            <!-- screen with scrolling code -->
+            <rect x="195" y="150" width="210" height="130" rx="10" stroke="#00e5ff" stroke-width="1.5" filter="url(#neon-glow)" />
+            <g clip-path="url(#screen-clip)" font-family="JetBrains Mono Variable, monospace" font-size="11" fill="#a3ff12">
+              <g class="codeflow">
+                <text x="208" y="172">$ dartpos --init serial</text>
+                <text x="208" y="188">rt.connect(RS232) .. OK</text>
+                <text x="208" y="204">fattura → SdI ..... OK</text>
+                <text x="208" y="220">mqtt.sync(offline) OK</text>
+                <text x="208" y="236">drift.migrate(v42) OK</text>
+                <text x="208" y="252">gemini.query(sales)..</text>
+                <text x="208" y="268">TLS pinned ....... OK</text>
+                <text x="208" y="284">$ dartpos --init serial</text>
+                <text x="208" y="300">rt.connect(RS232) .. OK</text>
+                <text x="208" y="316">fattura → SdI ..... OK</text>
+                <text x="208" y="332">mqtt.sync(offline) OK</text>
+                <text x="208" y="348">drift.migrate(v42) OK</text>
+              </g>
+            </g>
+
+            <!-- keypad -->
+            <g stroke="#00e5ff" stroke-width="1.2" opacity="0.8">
+              <rect x="200" y="320" width="56" height="40" rx="6" /><rect x="272" y="320" width="56" height="40" rx="6" />
+              <rect x="344" y="320" width="56" height="40" rx="6" /><rect x="200" y="376" width="56" height="40" rx="6" />
+              <rect x="272" y="376" width="56" height="40" rx="6" stroke="#a3ff12" /><rect x="344" y="376" width="56" height="40" rx="6" />
+              <rect x="200" y="432" width="56" height="40" rx="6" /><rect x="272" y="432" width="56" height="40" rx="6" />
+              <rect x="344" y="432" width="56" height="40" rx="6" stroke="#8b5cf6" />
+            </g>
+
+            <!-- internal data rain -->
+            <g stroke="#00e5ff" stroke-width="1" opacity="0.5" class="datarain">
+              <line x1="220" y1="490" x2="220" y2="545" /><line x1="260" y1="490" x2="260" y2="545" />
+              <line x1="300" y1="490" x2="300" y2="545" /><line x1="340" y1="490" x2="340" y2="545" />
+              <line x1="380" y1="490" x2="380" y2="545" />
+            </g>
+
+            <!-- receipt slot -->
+            <rect x="230" y="585" width="140" height="10" rx="5" stroke="#a3ff12" stroke-width="1.5" filter="url(#neon-glow)" />
+            <text x="300" y="640" text-anchor="middle" font-family="JetBrains Mono Variable, monospace" font-size="10" fill="#8a8a93" letter-spacing="3">RT-READY // SLOT_01</text>
+          </svg>
+        </div>
+
+        <!-- TOP layer: dark silhouette, hidden where the torch hits -->
+        <div class="layer-top absolute inset-0" aria-hidden="true">
+          <svg viewBox="0 0 600 700" class="h-full w-full" fill="none">
+            <rect x="160" y="110" width="280" height="440" rx="26" fill="#08080b" stroke="rgba(255,255,255,0.07)" stroke-width="1.5" />
+            <rect x="278" y="78" width="44" height="32" rx="6" fill="#08080b" stroke="rgba(255,255,255,0.06)" />
+            <rect x="195" y="150" width="210" height="130" rx="10" fill="#050507" stroke="rgba(255,255,255,0.05)" />
+            <g fill="#0c0c10">
+              <rect x="200" y="320" width="56" height="40" rx="6" /><rect x="272" y="320" width="56" height="40" rx="6" />
+              <rect x="344" y="320" width="56" height="40" rx="6" /><rect x="200" y="376" width="56" height="40" rx="6" />
+              <rect x="272" y="376" width="56" height="40" rx="6" /><rect x="344" y="376" width="56" height="40" rx="6" />
+              <rect x="200" y="432" width="56" height="40" rx="6" /><rect x="272" y="432" width="56" height="40" rx="6" />
+              <rect x="344" y="432" width="56" height="40" rx="6" />
+            </g>
+            <g fill="#0e0e13">
+              <rect x="138" y="150" width="22" height="9" rx="2" /><rect x="138" y="190" width="22" height="9" rx="2" />
+              <rect x="138" y="230" width="22" height="9" rx="2" /><rect x="138" y="270" width="22" height="9" rx="2" />
+              <rect x="138" y="390" width="22" height="9" rx="2" /><rect x="138" y="430" width="22" height="9" rx="2" />
+              <rect x="138" y="470" width="22" height="9" rx="2" /><rect x="138" y="510" width="22" height="9" rx="2" />
+              <rect x="440" y="150" width="22" height="9" rx="2" /><rect x="440" y="190" width="22" height="9" rx="2" />
+              <rect x="440" y="230" width="22" height="9" rx="2" /><rect x="440" y="270" width="22" height="9" rx="2" />
+              <rect x="440" y="390" width="22" height="9" rx="2" /><rect x="440" y="430" width="22" height="9" rx="2" />
+              <rect x="440" y="470" width="22" height="9" rx="2" /><rect x="440" y="510" width="22" height="9" rx="2" />
+            </g>
+            <rect x="230" y="585" width="140" height="10" rx="5" fill="#050507" stroke="rgba(163,255,18,0.15)" />
+          </svg>
+        </div>
+
+        <!-- hotspot pings (positioned in % of stage) -->
+        <div class="hotspot" data-hs="0" style="left: 50%; top: 13.4%;"><span class="ring"></span></div>
+        <div class="hotspot" data-hs="1" style="left: 24.8%; top: 66.4%;"><span class="ring"></span></div>
+        <div class="hotspot" data-hs="2" style="left: 50%; top: 84.3%;"><span class="ring"></span></div>
+
+        <!-- receipt sliding out of the slot -->
+        <div class="receipt-wrap pointer-events-none absolute left-1/2 top-[85.7%] z-30 w-[260px] -translate-x-1/2 overflow-hidden">
+          <div id="receipt" class="receipt pointer-events-auto font-mono text-[11px] leading-relaxed">
+            <p class="text-center text-[13px] font-bold tracking-widest text-acid">CUSTOM://PERCIUN_OS</p>
+            <p class="text-center text-[10px] text-dim">DOCUMENTO COMMERCIALE</p>
+            <p class="text-center text-[10px] text-dim">di vendita o prestazione — Parma, IT</p>
+            <div class="rule"></div>
+            <div class="row"><span>FLUTTER_SENIOR</span><span class="text-acid">★★★★★</span></div>
+            <div class="row"><span>FULL-STACK_DEV</span><span class="text-acid">★★★★★</span></div>
+            <div class="row"><span>AI/LLM_PIPELINE</span><span class="text-cyber">★★★★★</span></div>
+            <div class="row"><span>POS_&amp;_FISCALE</span><span class="text-vio">★★★★★</span></div>
+            <div class="rule"></div>
+            <div class="row font-bold"><span>TOTALE ESPERIENZA</span><span>7+ ANNI</span></div>
+            <div class="row"><span>PIATTAFORME</span><span>x6</span></div>
+            <div class="row"><span>BUG IN PRODUZIONE</span><span>NaN</span></div>
+            <div class="row"><span>SCONTO CAFFÈ</span><span>-100%</span></div>
+            <div class="rule"></div>
+            <div class="row text-[10px] text-dim"><span>PAGAMENTO</span><span>CONTACTLESS</span></div>
+            <div class="row text-[10px] text-dim"><span>RT n.</span><span>CP-2018-2026</span></div>
+            <a
+              href={cvUrl}
+              download
+              class="mt-3 block border border-acid py-2 text-center text-[12px] font-bold tracking-widest text-acid transition hover:bg-acid hover:text-black"
+            >⬇ SCARICA_CV.PDF</a>
+            <div class="barcode mt-3" aria-hidden="true"></div>
+            <p class="mt-2 text-center text-[10px] tracking-widest text-dim">*** GRAZIE E ARRIVEDERCI ***</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- hint + progress -->
+      <p class="mt-4 text-center font-mono text-[11px] tracking-widest text-dim">
+        <span id="hs-hint">ILLUMINA LA SAGOMA · TROVA GLI HOTSPOT</span>
+        <span id="hs-count" class="ml-2 text-acid">[0/3]</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* --- torch glow across the hero --- */
+  .torch {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    opacity: var(--torch-o, 0);
+    transition: opacity 0.4s;
+    background: radial-gradient(
+      circle 260px at var(--lx, 50%) var(--ly, 50%),
+      rgba(0, 229, 255, 0.14) 0%,
+      rgba(139, 92, 246, 0.08) 40%,
+      transparent 70%
+    );
+  }
+
+  /* --- x-ray masks --- */
+  .layer-under {
+    -webkit-mask-image: radial-gradient(
+      circle var(--mr, 0px) at var(--mx, 50%) var(--my, 50%),
+      black 0%,
+      black 55%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle var(--mr, 0px) at var(--mx, 50%) var(--my, 50%),
+      black 0%,
+      black 55%,
+      transparent 100%
+    );
+  }
+
+  .layer-top {
+    -webkit-mask-image: radial-gradient(
+      circle calc(var(--mr, 0px) * 0.9) at var(--mx, 50%) var(--my, 50%),
+      transparent 0%,
+      transparent 40%,
+      black 100%
+    );
+    mask-image: radial-gradient(
+      circle calc(var(--mr, 0px) * 0.9) at var(--mx, 50%) var(--my, 50%),
+      transparent 0%,
+      transparent 40%,
+      black 100%
+    );
+  }
+
+  /* --- under-layer micro animations --- */
+  @media (prefers-reduced-motion: no-preference) {
+    .traces path {
+      stroke-dasharray: 8 6;
+      animation: trace-flow 1.6s linear infinite;
+    }
+    @keyframes trace-flow {
+      to { stroke-dashoffset: -28; }
+    }
+    .nodes circle {
+      animation: node-pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes node-pulse {
+      50% { opacity: 0.35; }
+    }
+    .codeflow {
+      animation: code-scroll 6s linear infinite;
+    }
+    @keyframes code-scroll {
+      to { transform: translateY(-112px); }
+    }
+    .datarain line {
+      stroke-dasharray: 6 10;
+      animation: rain 0.9s linear infinite;
+    }
+    @keyframes rain {
+      to { stroke-dashoffset: -16; }
+    }
+  }
+
+  /* --- hotspots --- */
+  .hotspot {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    margin: -7px 0 0 -7px;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  .hotspot .ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-acid);
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  .hotspot.found .ring {
+    opacity: 1;
+    animation: hs-ping 1.4s ease-out infinite;
+  }
+
+  @keyframes hs-ping {
+    0% { transform: scale(0.4); opacity: 1; }
+    100% { transform: scale(2.6); opacity: 0; }
+  }
+
+  /* --- receipt --- */
+  .receipt {
+    background: #f4f2e9;
+    color: #17171a;
+    padding: 16px 14px 18px;
+    transform: translateY(-102%);
+    box-shadow: 0 0 32px rgba(163, 255, 18, 0.18);
+    --tw-shadow: none;
+    clip-path: polygon(
+      0 0, 100% 0, 100% calc(100% - 8px),
+      95% 100%, 90% calc(100% - 8px), 85% 100%, 80% calc(100% - 8px),
+      75% 100%, 70% calc(100% - 8px), 65% 100%, 60% calc(100% - 8px),
+      55% 100%, 50% calc(100% - 8px), 45% 100%, 40% calc(100% - 8px),
+      35% 100%, 30% calc(100% - 8px), 25% 100%, 20% calc(100% - 8px),
+      15% 100%, 10% calc(100% - 8px), 5% 100%, 0 calc(100% - 8px)
+    );
+  }
+
+  .receipt.printing {
+    animation: print-out 2.2s steps(24) forwards;
+  }
+
+  @keyframes print-out {
+    from { transform: translateY(-102%); }
+    to { transform: translateY(0); }
+  }
+
+  /* dark receipt text on light paper: force dark tones */
+  .receipt .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .receipt .rule {
+    border-top: 1px dashed rgba(23, 23, 26, 0.45);
+    margin: 8px 0;
+  }
+
+  .receipt .text-dim { color: #55555c; }
+
+  .barcode {
+    height: 34px;
+    background: repeating-linear-gradient(
+      90deg,
+      #17171a 0 2px, transparent 2px 5px,
+      #17171a 5px 6px, transparent 6px 11px,
+      #17171a 11px 15px, transparent 15px 17px
+    );
+  }
+</style>
+
+<script>
+  // ---------- typing effect ----------
+  const roles = [
+    'Senior Flutter Developer',
+    'Full-Stack Engineer',
+    'Sistemi POS & Fiscali',
+    'Integrazioni AI / LLM',
+    'Architetture Offline-First',
+  ];
+  const typingEl = document.getElementById('typing')!;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduced) {
+    typingEl.textContent = roles[0];
+  } else {
+    let ri = 0;
+    let ci = 0;
+    let deleting = false;
+    const tick = () => {
+      const word = roles[ri];
+      typingEl.textContent = word.slice(0, ci);
+      let delay = deleting ? 34 : 72;
+      if (!deleting && ci === word.length) {
+        deleting = true;
+        delay = 1800;
+      } else if (deleting && ci === 0) {
+        deleting = false;
+        ri = (ri + 1) % roles.length;
+        delay = 420;
+      } else {
+        ci += deleting ? -1 : 1;
+      }
+      setTimeout(tick, delay);
+    };
+    tick();
+  }
+
+  // ---------- x-ray torch ----------
+  const hero = document.getElementById('hero')!;
+  const stage = document.getElementById('stage')!;
+  const touchMode = window.matchMedia('(hover: none)').matches;
+
+  let tx = 0.5, ty = 0.5;      // target (0..1 within hero)
+  let lx = 0.5, ly = 0.5;      // lerped
+  let targetR = 0, radius = 0; // mask radius px
+  let active = false;
+
+  const HOTSPOTS = [
+    { x: 0.5, y: 0.134 },
+    { x: 0.248, y: 0.664 },
+    { x: 0.5, y: 0.843 },
+  ];
+  const found = [false, false, false];
+  let dwell: number[] = [0, 0, 0];
+  let unlocked = false;
+
+  const countEl = document.getElementById('hs-count')!;
+  const hintEl = document.getElementById('hs-hint')!;
+  const receipt = document.getElementById('receipt')!;
+
+  if (touchMode) hintEl.textContent = 'TOCCA LA SAGOMA · TROVA GLI HOTSPOT';
+
+  const setPointer = (clientX: number, clientY: number) => {
+    const hr = hero.getBoundingClientRect();
+    tx = (clientX - hr.left) / hr.width;
+    ty = (clientY - hr.top) / hr.height;
+    active = true;
+    targetR = 190;
+  };
+
+  hero.addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'touch') return;
+    setPointer(e.clientX, e.clientY);
+  });
+  hero.addEventListener('pointerleave', () => {
+    active = false;
+    targetR = 0;
+  });
+  stage.addEventListener('pointerdown', (e) => setPointer(e.clientX, e.clientY));
+
+  const unlock = () => {
+    if (unlocked) return;
+    unlocked = true;
+    hintEl.textContent = 'STAMPA IN CORSO…';
+    // small CRT flicker on the whole stage, then print
+    stage.animate(
+      [
+        { filter: 'brightness(1)' },
+        { filter: 'brightness(2.2) hue-rotate(40deg)' },
+        { filter: 'brightness(0.6)' },
+        { filter: 'brightness(1)' },
+      ],
+      { duration: 260, iterations: 2 }
+    );
+    setTimeout(() => {
+      receipt.classList.add('printing');
+      hintEl.textContent = 'SCONTRINO EMESSO · RT OK';
+    }, 600);
+  };
+
+  const markFound = (i: number) => {
+    if (found[i]) return;
+    found[i] = true;
+    const el = document.querySelector<HTMLElement>(`.hotspot[data-hs="${i}"]`);
+    el?.classList.add('found');
+    const n = found.filter(Boolean).length;
+    countEl.textContent = `[${n}/3]`;
+    if (n === 3) unlock();
+  };
+
+  let last = performance.now();
+  const loop = (now: number) => {
+    const dt = Math.min(64, now - last);
+    last = now;
+
+    const k = 1 - Math.pow(0.001, dt / 1000); // smooth lerp
+    lx += (tx - lx) * k;
+    ly += (ty - ly) * k;
+    radius += (targetR - radius) * k;
+
+    const hr = hero.getBoundingClientRect();
+    const sr = stage.getBoundingClientRect();
+    const px = hr.left + lx * hr.width;   // pointer in viewport px
+    const py = hr.top + ly * hr.height;
+
+    hero.style.setProperty('--lx', `${(lx * 100).toFixed(2)}%`);
+    hero.style.setProperty('--ly', `${(ly * 100).toFixed(2)}%`);
+    hero.style.setProperty('--torch-o', active ? '1' : '0');
+
+    stage.style.setProperty('--mx', `${(px - sr.left).toFixed(1)}px`);
+    stage.style.setProperty('--my', `${(py - sr.top).toFixed(1)}px`);
+    stage.style.setProperty('--mr', `${radius.toFixed(1)}px`);
+
+    // hotspot dwell detection (in stage px)
+    if (!unlocked && radius > 40) {
+      for (let i = 0; i < HOTSPOTS.length; i++) {
+        if (found[i]) continue;
+        const hx = HOTSPOTS[i].x * sr.width;
+        const hy = HOTSPOTS[i].y * sr.height;
+        const d = Math.hypot(px - sr.left - hx, py - sr.top - hy);
+        if (d < 70) {
+          dwell[i] += dt;
+          if (dwell[i] > 350) markFound(i);
+        } else {
+          dwell[i] = 0;
+        }
+      }
+    }
+
+    requestAnimationFrame(loop);
+  };
+
+  if (reduced) {
+    // no animation: reveal circuits statically and expose the receipt immediately
+    stage.style.setProperty('--mr', '9999px');
+    stage.style.setProperty('--mx', '50%');
+    stage.style.setProperty('--my', '50%');
+    receipt.classList.add('printing');
+    hintEl.textContent = 'SCONTRINO EMESSO · RT OK';
+    countEl.textContent = '[3/3]';
+  } else {
+    requestAnimationFrame(loop);
+  }
+</script>
