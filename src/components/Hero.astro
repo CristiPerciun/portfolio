@@ -79,34 +79,13 @@ const heroData = JSON.stringify({
         <div class="hotspot" data-hs="1" style="left: 24.8%; top: 66.4%;"><span class="ring"></span></div>
         <div class="hotspot" data-hs="2" style="left: 50%; top: 84.3%;"><span class="ring"></span></div>
 
-        <!-- receipt sliding out of the hologram -->
-        <div class="receipt-wrap pointer-events-none absolute left-1/2 top-[85.7%] z-30 w-[260px] -translate-x-1/2 overflow-hidden">
-          <div id="receipt" class="receipt pointer-events-auto font-mono text-[11px] leading-relaxed">
-            <p class="text-center text-[13px] font-bold tracking-widest text-acid">CUSTOM://PERCIUN_OS</p>
-            <p class="text-center text-[10px] text-dim">{t.receipt.doc}</p>
-            <p class="text-center text-[10px] text-dim">{t.receipt.sub}</p>
-            <div class="rule"></div>
-            <div class="row"><span>FLUTTER_SENIOR</span><span class="text-acid">★★★★★</span></div>
-            <div class="row"><span>FULL-STACK_DEV</span><span class="text-acid">★★★★★</span></div>
-            <div class="row"><span>AI/LLM_PIPELINE</span><span class="text-cyber">★★★★★</span></div>
-            <div class="row"><span>POS_&amp;_FISCALE</span><span class="text-vio">★★★★★</span></div>
-            <div class="rule"></div>
-            <div class="row font-bold"><span>{t.receipt.total}</span><span>{t.receipt.totalVal}</span></div>
-            <div class="row"><span>{t.receipt.platforms}</span><span>x6</span></div>
-            <div class="row"><span>{t.receipt.bugs}</span><span>NaN</span></div>
-            <div class="row"><span>{t.receipt.coffee}</span><span>-100%</span></div>
-            <div class="rule"></div>
-            <div class="row text-[10px] text-dim"><span>{t.receipt.payment}</span><span>CONTACTLESS</span></div>
-            <div class="row text-[10px] text-dim"><span>RT n.</span><span>CP-2018-2026</span></div>
-            <a
-              href={cvUrl}
-              download
-              class="mt-3 block border border-acid py-2 text-center text-[12px] font-bold tracking-widest text-acid transition hover:bg-acid hover:text-black"
-            >{t.receipt.download}</a>
-            <div class="barcode mt-3" aria-hidden="true"></div>
-            <p class="mt-2 text-center text-[10px] tracking-widest text-dim">{t.receipt.bye}</p>
-          </div>
-        </div>
+        <!-- CV download, unlocked by the hotspots -->
+        <a
+          id="cv-unlock"
+          href={cvUrl}
+          download
+          class="absolute bottom-[3%] left-1/2 z-30 -translate-x-1/2 border border-acid bg-[rgba(3,3,3,0.85)] px-6 py-2.5 text-center font-mono text-[13px] font-bold tracking-widest whitespace-nowrap text-acid backdrop-blur-sm transition hover:bg-acid hover:text-black"
+        >{t.cvBtn}</a>
       </div>
 
       <!-- hint + progress + shape label -->
@@ -166,53 +145,29 @@ const heroData = JSON.stringify({
     100% { transform: scale(2.6); opacity: 0; }
   }
 
-  /* --- receipt --- */
-  .receipt {
-    background: #f4f2e9;
-    color: #17171a;
-    padding: 16px 14px 18px;
-    transform: translateY(-102%);
-    box-shadow: 0 0 32px rgba(163, 255, 18, 0.18);
-    clip-path: polygon(
-      0 0, 100% 0, 100% calc(100% - 8px),
-      95% 100%, 90% calc(100% - 8px), 85% 100%, 80% calc(100% - 8px),
-      75% 100%, 70% calc(100% - 8px), 65% 100%, 60% calc(100% - 8px),
-      55% 100%, 50% calc(100% - 8px), 45% 100%, 40% calc(100% - 8px),
-      35% 100%, 30% calc(100% - 8px), 25% 100%, 20% calc(100% - 8px),
-      15% 100%, 10% calc(100% - 8px), 5% 100%, 0 calc(100% - 8px)
-    );
+  /* --- CV unlock button --- */
+  #cv-unlock {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
   }
 
-  .receipt.printing {
-    animation: print-out 2.2s steps(24) forwards;
+  #cv-unlock.unlocked {
+    visibility: visible;
+    pointer-events: auto;
+    animation: glitch-in 0.7s steps(12) forwards;
+    box-shadow:
+      0 0 24px rgba(163, 255, 18, 0.35),
+      inset 0 0 16px rgba(163, 255, 18, 0.08);
   }
 
-  @keyframes print-out {
-    from { transform: translateY(-102%); }
-    to { transform: translateY(0); }
-  }
-
-  .receipt .row {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-  }
-
-  .receipt .rule {
-    border-top: 1px dashed rgba(23, 23, 26, 0.45);
-    margin: 8px 0;
-  }
-
-  .receipt .text-dim { color: #55555c; }
-
-  .barcode {
-    height: 34px;
-    background: repeating-linear-gradient(
-      90deg,
-      #17171a 0 2px, transparent 2px 5px,
-      #17171a 5px 6px, transparent 6px 11px,
-      #17171a 11px 15px, transparent 15px 17px
-    );
+  @keyframes glitch-in {
+    0% { opacity: 0; transform: translate(-52%, 6px) skewX(-8deg); }
+    20% { opacity: 1; transform: translate(-49%, -2px) skewX(6deg); }
+    40% { opacity: 0.4; transform: translate(-51%, 1px) skewX(-4deg); }
+    60% { opacity: 1; transform: translate(-50%, 0) skewX(2deg); }
+    80% { opacity: 0.7; transform: translate(-50%, 0) skewX(0); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
   }
 </style>
 
@@ -257,7 +212,7 @@ const heroData = JSON.stringify({
   const countEl = document.getElementById('hs-count')!;
   const hintEl = document.getElementById('hs-hint')!;
   const shapeEl = document.getElementById('shape-label')!;
-  const receipt = document.getElementById('receipt')!;
+  const cvBtn = document.getElementById('cv-unlock')!;
 
   if (touchMode) hintEl.textContent = CFG.hintTouch;
 
@@ -301,7 +256,7 @@ const heroData = JSON.stringify({
       octx.textAlign = 'center';
       octx.textBaseline = 'middle';
       octx.fillText('€', VW / 2, VH / 2 - 10);
-    } else {
+    } else if (name === 'ai') {
       octx.font = '900 260px "JetBrains Mono Variable", monospace';
       octx.textAlign = 'center';
       octx.textBaseline = 'middle';
@@ -312,6 +267,20 @@ const heroData = JSON.stringify({
       octx.stroke();
       octx.font = '700 90px "JetBrains Mono Variable", monospace';
       octx.fillText('{ } ', VW / 2, VH / 2 + 130);
+    } else {
+      // 'cv' — secret shape unlocked by the hotspots
+      octx.font = '900 280px "JetBrains Mono Variable", monospace';
+      octx.textAlign = 'center';
+      octx.textBaseline = 'middle';
+      octx.fillText('CV', VW / 2, VH / 2 - 130);
+      // down arrow
+      octx.fillRect(VW / 2 - 32, VH / 2 + 40, 64, 130);
+      octx.beginPath();
+      octx.moveTo(VW / 2 - 95, VH / 2 + 170);
+      octx.lineTo(VW / 2 + 95, VH / 2 + 170);
+      octx.lineTo(VW / 2, VH / 2 + 290);
+      octx.closePath();
+      octx.fill();
     }
 
     const img = octx.getImageData(0, 0, VW, VH).data;
@@ -328,7 +297,9 @@ const heroData = JSON.stringify({
     return pts;
   };
 
-  const SHAPES = ['pos', 'code', 'euro', 'ai'];
+  const SHAPES = ['pos', 'code', 'euro', 'ai', 'cv'];
+  const CV_IDX = 4; // secret: excluded from auto-rotation until unlocked
+  let rotationLen = CV_IDX;
   const shapePts = SHAPES.map(drawShape);
 
   // --- particles ---
@@ -438,8 +409,14 @@ const heroData = JSON.stringify({
       ],
       { duration: 260, iterations: 2 }
     );
+    // big shockwave from the center, then morph into the secret CV shape
+    waves.push({ x: W / 2, y: H / 2, r: 4, a: 1 });
     setTimeout(() => {
-      receipt.classList.add('printing');
+      shapeIdx = CV_IDX;
+      assign(CV_IDX);
+      rotationLen = SHAPES.length; // CV joins the rotation from now on
+      morphAt = performance.now() + 9000; // linger on the reward
+      cvBtn.classList.add('unlocked');
       hintEl.textContent = CFG.hintDone;
     }, 600);
   };
@@ -475,7 +452,7 @@ const heroData = JSON.stringify({
     last = now;
 
     if (now > morphAt) {
-      shapeIdx = (shapeIdx + 1) % SHAPES.length;
+      shapeIdx = (shapeIdx + 1) % rotationLen;
       assign(shapeIdx);
       morphAt = now + 5200;
     }
@@ -553,14 +530,14 @@ const heroData = JSON.stringify({
   };
 
   if (reduced) {
-    // static render at targets, receipt immediately available
+    // static render at targets, CV immediately available
     ctx.fillStyle = '#030303';
     ctx.fillRect(0, 0, W, H);
     for (const p of parts) {
       ctx.fillStyle = p.c;
       ctx.fillRect(ox + p.tx * scale, oy + p.ty * scale, p.sz, p.sz);
     }
-    receipt.classList.add('printing');
+    cvBtn.classList.add('unlocked');
     hintEl.textContent = CFG.hintDone;
     countEl.textContent = '[3/3]';
   } else {
