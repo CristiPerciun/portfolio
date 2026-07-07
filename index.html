@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cristian Perciun — Sviluppatore Flutter / Full-Stack</title>
+<meta name="description" content="Sviluppatore Flutter/Dart con 7+ anni nei sistemi POS e fiscali. Architetture offline-first su 6 piattaforme, dal driver seriale alla pipeline CI/CD. Parma, Italia.">
+<link rel="alternate" hreflang="it" href="https://cristiperciun.github.io/portfolio/">
+<link rel="alternate" hreflang="en" href="https://cristiperciun.github.io/portfolio/en/">
+<link rel="alternate" hreflang="x-default" href="https://cristiperciun.github.io/portfolio/">
+<link rel="canonical" href="https://cristiperciun.github.io/portfolio/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101113'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' fill='%23EDE8DF' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;450;500;600;650&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — warm-grey monochrome, cream on soft dark
+   ============================================================ */
+:root{
+  --canvas:      #101113;
+  --surface-1:   #16171a;
+  --surface-2:   #1c1e21;
+  --surface-3:   #232529;
+  --paper:       #1a1c1f;
+
+  --cream:       #ede8df;
+  --cream-dim:   #a9a49a;
+  --cream-faint: #726e66;
+
+  --line:        rgba(237,232,223,.08);
+  --line-strong: rgba(237,232,223,.15);
+
+  --glow:        rgba(237,232,223,.05);
+
+  --font-sans: "Instrument Sans", -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+  --r-card: 12px;
+  --r-btn:  8px;
+
+  --shadow-rest:
+    0 1px 2px rgba(0,0,0,.30),
+    0 8px 24px rgba(0,0,0,.35);
+  --shadow-lift:
+    0 2px 4px rgba(0,0,0,.35),
+    0 16px 48px rgba(0,0,0,.50),
+    0 32px 80px rgba(0,0,0,.35);
+
+  --w-content: 1080px;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+}
+
+body{
+  background: var(--canvas);
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 1.5;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection{ background: rgba(237,232,223,.90); color:#101113; }
+
+a{ color: inherit; text-decoration: none; }
+
+:focus-visible{
+  outline: 2px solid var(--cream-dim);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* film grain — one quiet layer of texture */
+.grain{
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 200;
+  opacity: .028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap{
+  max-width: var(--w-content);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.mono{
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+}
+
+/* ---------- portrait ---------- */
+.portrait{
+  width: 92px; height: 92px;
+  border-radius: 50%;
+  margin-bottom: 26px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 26%, rgba(237,232,223,.20), rgba(237,232,223,.03) 72%),
+    var(--surface-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: inset 0 1px 0 rgba(237,232,223,.09), 0 10px 28px rgba(0,0,0,.5);
+}
+.portrait img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 14%;
+  filter: saturate(.9);
+}
+
+/* ---------- language switcher ---------- */
+.lang{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+.lang a{ color: var(--cream-faint); transition: color .15s ease; }
+.lang a:hover{ color: var(--cream); }
+.lang a[aria-current]{ color: var(--cream); }
+.lang .sep{ color: var(--cream-faint); opacity: .5; }
+@media (max-width: 720px){
+  .lang{ margin-left: auto; }
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position: sticky; top: 0;
+  z-index: 100;
+  background: rgba(16,17,19,.72);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner{
+  max-width: var(--w-content);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+.brand-mark{
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: inset 0 1px 0 rgba(237,232,223,.07), 0 1px 3px rgba(0,0,0,.4);
+  display: grid; place-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--cream);
+  letter-spacing: 0;
+}
+.nav-links{
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+.nav-links a{
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--cream-dim);
+  padding: 7px 11px;
+  border-radius: 7px;
+  transition: color .15s ease, background-color .15s ease;
+}
+.nav-links a:hover{ color: var(--cream); background: rgba(237,232,223,.05); }
+
+.btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 550;
+  padding: 8px 15px;
+  border-radius: var(--r-btn);
+  border: 1px solid var(--line-strong);
+  background: var(--surface-2);
+  color: var(--cream);
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(237,232,223,.06), 0 1px 3px rgba(0,0,0,.35);
+  transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{
+  background: var(--surface-3);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(237,232,223,.07), 0 6px 16px rgba(0,0,0,.45);
+}
+.btn:active{ transform: translateY(0); }
+
+.btn-solid{
+  background: var(--cream);
+  color: #131416;
+  border-color: var(--cream);
+  box-shadow: 0 1px 3px rgba(0,0,0,.4), 0 8px 24px rgba(237,232,223,.10);
+}
+.btn-solid:hover{
+  background: #fdf9f0;
+  box-shadow: 0 2px 6px rgba(0,0,0,.4), 0 10px 32px rgba(237,232,223,.16);
+}
+
+.arrow{ font-size: 12px; opacity: .55; transition: transform .15s ease, opacity .15s ease; }
+.btn:hover .arrow, .link-plain:hover .arrow{ transform: translate(2px,-2px); opacity: 1; }
+
+@media (max-width: 720px){
+  .nav-links{ display: none; }
+  .nav .btn{ margin-left: auto; }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position: relative;
+  padding: 108px 0 84px;
+  overflow: clip;
+}
+/* the lamp — one soft cream light source above the fold */
+.hero::before{
+  content: "";
+  position: absolute;
+  top: -340px; left: 50%;
+  width: 980px; height: 640px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, var(--glow), transparent 70%);
+  pointer-events: none;
+}
+.hero-grid{
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: 72px;
+  align-items: center;
+}
+.eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+.eyebrow .dot{
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cream);
+  box-shadow: 0 0 10px 2px rgba(237,232,223,.45);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+@keyframes pulse{ 50%{ opacity:.35; } }
+
+h1{
+  font-size: clamp(38px, 5.4vw, 62px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  margin-bottom: 24px;
+}
+h1 em{
+  font-style: normal;
+  color: var(--cream-faint);
+}
+.hero-sub{
+  font-size: 17.5px;
+  font-weight: 450;
+  color: var(--cream-dim);
+  line-height: 1.62;
+  max-width: 54ch;
+  margin-bottom: 36px;
+}
+.hero-sub strong{ color: var(--cream); font-weight: 550; }
+.hero-cta{ display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- the fiscal receipt (signature element) ---------- */
+.printer{
+  justify-self: end;
+  width: min(330px, 100%);
+}
+.printer-slot{
+  height: 22px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, var(--surface-3), var(--surface-1));
+  border: 1px solid var(--line-strong);
+  box-shadow:
+    inset 0 3px 8px rgba(0,0,0,.6),
+    0 1px 0 rgba(237,232,223,.05);
+  position: relative;
+  z-index: 3;
+}
+.printer-slot::after{
+  content: "";
+  position: absolute;
+  left: 14px; right: 14px; top: 8px;
+  height: 5px;
+  border-radius: 3px;
+  background: #0a0b0c;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.9);
+}
+.receipt-window{
+  overflow: hidden;
+  padding: 0 14px 26px;
+  margin-top: -2px;
+}
+.receipt-paper{
+  animation: print 2.2s steps(22) .5s both;
+}
+@keyframes print{
+  from{ transform: translateY(-101%); }
+  to{ transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce){
+  .receipt-paper{ animation: none; }
+}
+.receipt{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-top: none;
+  border-bottom: none;
+  border-radius: 0 0 1px 1px;
+  padding: 22px 20px 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--cream-dim);
+  box-shadow: var(--shadow-rest);
+}
+.receipt-head{
+  text-align: center;
+  color: var(--cream);
+  letter-spacing: .12em;
+  font-weight: 500;
+}
+.receipt-head small{
+  display: block;
+  font-size: 10px;
+  color: var(--cream-faint);
+  letter-spacing: .18em;
+  font-weight: 400;
+}
+.receipt hr{
+  border: none;
+  border-top: 1px dashed rgba(237,232,223,.18);
+  margin: 10px 0;
+}
+.r-row{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.r-row b{ color: var(--cream); font-weight: 500; }
+.r-total{
+  color: var(--cream);
+  font-weight: 500;
+  letter-spacing: .05em;
+}
+.r-foot{
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--cream-faint);
+  line-height: 1.8;
+}
+.receipt-tear{
+  height: 11px;
+  background: var(--paper);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  clip-path: polygon(0 0, 100% 0,
+    95% 100%, 90% 0, 85% 100%, 80% 0, 75% 100%, 70% 0, 65% 100%, 60% 0,
+    55% 100%, 50% 0, 45% 100%, 40% 0, 35% 100%, 30% 0, 25% 100%, 20% 0,
+    15% 100%, 10% 0, 5% 100%);
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.4));
+}
+
+@media (max-width: 880px){
+  .hero{ padding: 72px 0 64px; }
+  .hero-grid{ grid-template-columns: 1fr; gap: 56px; }
+  .printer{ justify-self: center; }
+}
+
+/* ---------- stat strip ---------- */
+.strip{
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-1);
+}
+.strip-inner{
+  max-width: var(--w-content);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat{
+  padding: 22px 20px;
+  border-left: 1px solid var(--line);
+}
+.stat:first-child{ border-left: none; }
+.stat-n{
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--cream);
+  line-height: 1.15;
+}
+.stat-l{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  margin-top: 4px;
+}
+@media (max-width: 880px){
+  .strip-inner{ grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(3){ border-left: none; }
+  .stat:nth-child(n+3){ border-top: 1px solid var(--line); }
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+.section{ padding: 104px 0 0; }
+.section, .contact{ scroll-margin-top: 72px; }
+.section-head{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+h2{
+  font-size: clamp(26px, 3.4vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.028em;
+  line-height: 1.1;
+}
+.section-note{
+  font-size: 14.5px;
+  color: var(--cream-faint);
+  max-width: 34ch;
+  text-align: right;
+}
+@media (max-width: 720px){
+  .section{ padding-top: 80px; }
+  .section-head{ flex-direction: column; align-items: flex-start; }
+  .section-note{ text-align: left; }
+}
+
+/* scroll reveal */
+.reveal{
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s cubic-bezier(.2,.6,.2,1), transform .7s cubic-bezier(.2,.6,.2,1);
+}
+.reveal.in{ opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity: 1; transform: none; transition: none; }
+}
+
+/* ============================================================
+   3D CARDS (shared)
+   ============================================================ */
+.tilt{
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform .45s cubic-bezier(.2,.6,.2,1), box-shadow .45s cubic-bezier(.2,.6,.2,1);
+}
+.tilt.is-live{ transition: box-shadow .45s cubic-bezier(.2,.6,.2,1); }
+
+.card{
+  background: linear-gradient(180deg, var(--surface-2), var(--surface-1) 65%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  box-shadow: inset 0 1px 0 rgba(237,232,223,.06), var(--shadow-rest);
+  overflow: hidden;
+}
+.card:hover{
+  box-shadow: inset 0 1px 0 rgba(237,232,223,.08), var(--shadow-lift);
+  border-color: var(--line-strong);
+}
+/* cursor-following sheen */
+.card::after{
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(560px circle at var(--mx,50%) var(--my,-30%),
+              rgba(237,232,223,.075), transparent 55%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.card:hover::after{ opacity: 1; }
+
+.card-inner{
+  position: relative;
+  padding: 26px 26px 24px;
+  transform: translateZ(24px);
+}
+
+/* ============================================================
+   EXPERIENCE
+   ============================================================ */
+.xp-grid{
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.xp-side{ position: sticky; top: 96px; }
+.xp-side h3{
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 14px 0 10px;
+}
+.xp-side p{
+  font-size: 14.5px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+}
+.xp-list{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.xp-card .card-inner{ display: flex; flex-direction: column; gap: 14px; }
+.xp-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.xp-role{
+  font-size: 17.5px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.xp-date{
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .08em;
+  color: var(--cream-faint);
+  white-space: nowrap;
+}
+.xp-card ul{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.xp-card li{
+  font-size: 14.5px;
+  color: var(--cream-dim);
+  line-height: 1.6;
+  padding-left: 18px;
+  position: relative;
+}
+.xp-card li::before{
+  content: "";
+  position: absolute;
+  left: 0; top: 9px;
+  width: 6px; height: 1.5px;
+  background: var(--cream-faint);
+}
+.xp-card li b{ color: var(--cream); font-weight: 550; }
+
+.tags{ display: flex; flex-wrap: wrap; gap: 7px; }
+.tag{
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: .05em;
+  color: var(--cream-dim);
+  background: rgba(237,232,223,.045);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 9px;
+  box-shadow: inset 0 1px 0 rgba(237,232,223,.04);
+}
+.xp-minor{
+  padding: 18px 26px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-card);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: var(--cream-faint);
+}
+.xp-minor b{ color: var(--cream-dim); font-weight: 550; }
+
+@media (max-width: 880px){
+  .xp-grid{ grid-template-columns: 1fr; gap: 36px; }
+  .xp-side{ position: static; }
+}
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+.proj-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.proj-card{ display: flex; }
+.proj-card .card-inner{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+.proj-icon{
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: var(--surface-3);
+  border: 1px solid var(--line-strong);
+  box-shadow: inset 0 1px 0 rgba(237,232,223,.08), 0 2px 6px rgba(0,0,0,.4);
+  display: grid;
+  place-items: center;
+  color: var(--cream);
+}
+.proj-icon svg{ width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+.proj-name{
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.proj-desc{
+  font-size: 14px;
+  color: var(--cream-dim);
+  line-height: 1.62;
+  flex-grow: 1;
+}
+.proj-link{
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .06em;
+  color: var(--cream-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: color .15s ease;
+}
+.proj-link:hover{ color: var(--cream); }
+@media (max-width: 960px){
+  .proj-grid{ grid-template-columns: 1fr; max-width: 560px; }
+}
+
+/* ============================================================
+   SKILLS
+   ============================================================ */
+.skills-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  overflow: hidden;
+}
+.skill-cell{
+  background: var(--canvas);
+  padding: 26px 26px 28px;
+  transition: background-color .25s ease;
+}
+.skill-cell:hover{ background: var(--surface-1); }
+.skill-cell h3{
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.skill-cell h3::before{
+  content: "";
+  width: 5px; height: 5px;
+  background: var(--cream-faint);
+  border-radius: 1px;
+}
+.skill-cell p{
+  font-size: 13.5px;
+  color: var(--cream-dim);
+  line-height: 1.7;
+}
+@media (max-width: 960px){ .skills-grid{ grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px){ .skills-grid{ grid-template-columns: 1fr; } }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact{
+  margin-top: 112px;
+  border-top: 1px solid var(--line);
+  position: relative;
+  overflow: clip;
+}
+.contact::before{
+  content: "";
+  position: absolute;
+  bottom: -300px; left: 50%;
+  width: 900px; height: 520px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, var(--glow), transparent 70%);
+  pointer-events: none;
+}
+.contact-inner{
+  position: relative;
+  padding: 108px 0 96px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+.contact h2{ font-size: clamp(30px, 4.4vw, 48px); max-width: 18ch; }
+.contact-sub{
+  font-size: 16px;
+  color: var(--cream-dim);
+  max-width: 48ch;
+  line-height: 1.65;
+}
+.contact-cta{ display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.contact-meta{
+  display: flex;
+  gap: 10px 26px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+.contact-meta span{
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .08em;
+  color: var(--cream-faint);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{
+  border-top: 1px solid var(--line);
+  padding: 26px 0 34px;
+}
+.footer-inner{
+  max-width: var(--w-content);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--cream-faint);
+}
+.footer a{ color: var(--cream-dim); transition: color .15s ease; }
+.footer a:hover{ color: var(--cream); }
+</style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Cristian Perciun — home">
+      <span class="brand-mark" aria-hidden="true">CP</span>
+      Cristian Perciun
+    </a>
+    <nav class="nav-links" aria-label="Principale">
+      <a href="#experience">Esperienza</a>
+      <a href="#projects">Progetti</a>
+      <a href="#skills">Competenze</a>
+      <a href="#contact">Contatti</a>
+    </nav>
+    <div class="lang" aria-label="Lingua">
+      <a href="./" aria-current="page">IT</a><span class="sep">·</span><a href="en/">EN</a>
+    </div>
+    <a class="btn" href="https://github.com/CristiPerciun" target="_blank" rel="noopener">
+      GitHub <span class="arrow">↗</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="portrait">
+          <img src="me.png" alt="Cristian Perciun">
+        </div>
+        <p class="eyebrow mono"><span class="dot" aria-hidden="true"></span> Parma, Italia · Sviluppatore Flutter / Full-Stack</p>
+        <h1>Dal driver seriale <em>alla pipeline di rilascio.</em></h1>
+        <p class="hero-sub">
+          Sono Cristian — <strong>sviluppatore Flutter/Dart con 7+ anni</strong> nei sistemi POS
+          e fiscali in Custom S.p.A. Costruisco <strong>software offline-first che gira su sei
+          piattaforme da un unico codebase</strong>, collegato all'hardware reale e alla normativa
+          fiscale italiana, con AI/LLM dove porta davvero valore.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-solid" href="#experience">Vedi esperienza</a>
+          <a class="btn" href="mailto:cristi.perciun@gmail.com">Scrivimi <span class="arrow">↗</span></a>
+        </div>
+      </div>
+
+      <!-- Signature: a fiscal receipt, printing on load -->
+      <div class="printer tilt" data-tilt aria-hidden="true">
+        <div class="printer-slot"></div>
+        <div class="receipt-window">
+          <div class="receipt-paper">
+            <div class="receipt">
+            <p class="receipt-head">CAREER.LOG<small>Custom S.p.A. — dal 2018</small></p>
+            <hr>
+            <p class="r-row"><span>FLUTTER / DART</span><b>7+ anni</b></p>
+            <p class="r-row"><span>PIATTAFORME, 1 CODEBASE</span><b>×6</b></p>
+            <p class="r-row"><span>FAMIGLIE PERIFERICHE POS</span><b>×4</b></p>
+            <p class="r-row"><span>CASSA OFFLINE-FIRST</span><b>100%</b></p>
+            <p class="r-row"><span>CONFORMITÀ FISCALE (RT/SDI)</span><b>OK</b></p>
+            <hr>
+            <p class="r-row r-total"><span>TOTALE</span><span>PRONTO AL RILASCIO</span></p>
+            <hr>
+            <p class="r-foot">ESC-POS · FatturaPA/SdI · MQTT<br>DOC. N. 2026-0707 — NON FISCALE</p>
+            </div>
+            <div class="receipt-tear"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATS ================= -->
+  <section class="strip" aria-label="Numeri chiave">
+    <div class="strip-inner">
+      <div class="stat"><div class="stat-n">7+</div><div class="stat-l">Anni in POS &amp; fiscale</div></div>
+      <div class="stat"><div class="stat-n">6</div><div class="stat-l">Piattaforme, un codebase</div></div>
+      <div class="stat"><div class="stat-n">4</div><div class="stat-l">Famiglie di periferiche integrate</div></div>
+      <div class="stat"><div class="stat-n">3</div><div class="stat-l">Prodotti personali pubblicati</div></div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Esperienza</h2>
+        <p class="section-note">Otto anni dentro un unico dominio di prodotto — dal testing del firmware alla consegna dell'intero stack.</p>
+      </div>
+
+      <div class="xp-grid">
+        <aside class="xp-side reveal">
+          <p class="mono">Custom S.p.A. — Parma</p>
+          <h3>Tecnologia POS &amp; fiscale</h3>
+          <p>Tre ruoli, responsabilità crescenti: prima la verifica del firmware dei dispositivi fiscali,
+             poi le app retail Android native, oggi la progettazione e il rilascio end-to-end di prodotti
+             POS cross-platform.</p>
+        </aside>
+
+        <div class="xp-list">
+          <article class="card tilt xp-card reveal" data-tilt>
+            <div class="card-inner">
+              <div class="xp-top">
+                <span class="xp-role">Software Developer — Mobile &amp; Desktop</span>
+                <span class="xp-date">12/2024 — Oggi</span>
+              </div>
+              <ul>
+                <li><b>InventaOne</b> — gestionale POS in Flutter distribuito su 4 piattaforme (Windows, Android, iOS, Linux) da un unico codebase: vendita, gestione sala, fatturazione elettronica FatturaPA/SdI e dashboard con interrogazioni di vendita AI (Gemini).</li>
+                <li>Progettata un'<b>architettura offline-first</b> — Drift/SQLite con migrazioni versionate, server HTTP locale con TLS e certificate pinning, messaggistica MQTT — che mantiene i punti cassa pienamente operativi senza connettività.</li>
+                <li><b>dartpos</b> — SDK Flutter che integra 4 famiglie di periferiche POS (stampanti fiscali/ESC-POS, terminali EFT-POS, cash keeper, display cliente) su un livello di trasporto astratto seriale/Ethernet/USB.</li>
+                <li>Qualità e rilascio automatizzati: Jenkins + SonarQube, MSIX offuscato, .deb firmato, test end-to-end Appium, più un package di logging riutilizzabile con code persistenti e retry.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Flutter</span><span class="tag">Drift/SQLite</span><span class="tag">MQTT</span><span class="tag">Gemini</span><span class="tag">Jenkins</span><span class="tag">Appium</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tilt xp-card reveal" data-tilt>
+            <div class="card-inner">
+              <div class="xp-top">
+                <span class="xp-role">Sviluppatore Software</span>
+                <span class="xp-date">09/2022 — 12/2023</span>
+              </div>
+              <ul>
+                <li>Sviluppo e manutenzione delle app Android native <b>KeepUp Smart</b> e <b>KeepUp Order</b> (Java, build multi-flavor, ProGuard) per vendita e ristorazione.</li>
+                <li>Test UI automatici con Espresso integrati in TestRail e ciclo di reporting automatizzato in CI (Jenkins, Silk, notifiche Telegram), riducendo la verifica manuale.</li>
+                <li>API REST e job CRON in PHP sulla piattaforma cloud aziendale — fatturazione elettronica, telemetria dispositivi, licensing — su MySQL e SQL Server.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Java / Android</span><span class="tag">Espresso</span><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">SQL Server</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card tilt xp-card reveal" data-tilt>
+            <div class="card-inner">
+              <div class="xp-top">
+                <span class="xp-role">Testing Software &amp; Firmware</span>
+                <span class="xp-date">09/2018 — 09/2022</span>
+              </div>
+              <ul>
+                <li>Verifica di integrità e qualità di firmware e software dei dispositivi fiscali; gestione delle release sui portali ufficiali.</li>
+                <li>Supporto tecnico di 3° livello sui casi critici — dall'analisi delle cause alle correzioni dirette nel codice di prodotto.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Firmware fiscale</span><span class="tag">QA</span><span class="tag">Supporto L3</span>
+              </div>
+            </div>
+          </article>
+
+          <div class="xp-minor reveal">
+            <span><b>Protec S.r.l.</b> — Stage estivo, laboratorio informatico</span>
+            <span class="xp-date">06/2016</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS ================= -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Progetti personali</h2>
+        <p class="section-note">Ideati, sviluppati e pubblicati end-to-end, in produzione su infrastruttura personale.</p>
+      </div>
+
+      <div class="proj-grid">
+        <article class="card tilt proj-card reveal" data-tilt>
+          <div class="card-inner">
+            <div class="proj-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+            </div>
+            <h3 class="proj-name">FitAI Analyzer + garmin-sync-server</h3>
+            <p class="proj-desc">
+              App Flutter multipiattaforma che trasforma i dati Garmin/Strava in obiettivi giornalieri
+              generati dall'AI, con backend Python self-hosted. Firma Garmin OAuth1 HMAC-SHA1
+              implementata a mano con gestione MFA, sync delta incrementale e strategia dati Firestore
+              a 3 livelli che riduce i costi dei prompt AI.
+            </p>
+            <div class="tags">
+              <span class="tag">Flutter</span><span class="tag">FastAPI</span><span class="tag">Firebase</span><span class="tag">Docker</span><span class="tag">Raspberry Pi</span>
+            </div>
+            <a class="proj-link" href="https://github.com/CristiPerciun" target="_blank" rel="noopener">github.com/CristiPerciun <span class="arrow">↗</span></a>
+          </div>
+        </article>
+
+        <article class="card tilt proj-card reveal" data-tilt>
+          <div class="card-inner">
+            <div class="proj-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4M8 10l2 1.5L8 13M13 13h3"/></svg>
+            </div>
+            <h3 class="proj-name">Automazione contenuti con AI generativa</h3>
+            <p class="proj-desc">
+              Pipeline multi-agente che genera video e contenuti social con approvazione umana prima
+              della pubblicazione: scripting LLM a ruoli specializzati, sintesi vocale, immagini
+              generative e publishing via Meta Graph API.
+            </p>
+            <div class="tags">
+              <span class="tag">Flutter desktop</span><span class="tag">Python</span><span class="tag">Gemini/Ollama</span><span class="tag">Kokoro TTS</span><span class="tag">FFmpeg</span>
+            </div>
+            <a class="proj-link" href="https://github.com/CristiPerciun" target="_blank" rel="noopener">github.com/CristiPerciun <span class="arrow">↗</span></a>
+          </div>
+        </article>
+
+        <article class="card tilt proj-card reveal" data-tilt>
+          <div class="card-inner">
+            <div class="proj-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 20L20 4M6 4h.01M10 4h.01M4 8h.01M4 12h.01M20 12v8h-8"/></svg>
+            </div>
+            <h3 class="proj-name">MisuraPerfetta</h3>
+            <p class="proj-desc">
+              Motore di calcolo parametrico che trasforma le misure corporee in cartamodelli sartoriali,
+              con export/stampa PDF e anteprima 3D — Drift su WebAssembly per la versione web.
+            </p>
+            <div class="tags">
+              <span class="tag">Flutter Web/Win</span><span class="tag">Drift + WASM</span><span class="tag">pdf/printing</span>
+            </div>
+            <a class="proj-link" href="https://github.com/CristiPerciun" target="_blank" rel="noopener">github.com/CristiPerciun <span class="arrow">↗</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Competenze tecniche</h2>
+        <p class="section-note">Tutto lo stack di un prodotto POS — lo schermo, il server e l'hardware nel mezzo.</p>
+      </div>
+
+      <div class="skills-grid reveal">
+        <div class="skill-cell">
+          <h3>Mobile &amp; cross-platform</h3>
+          <p>Flutter (Android, iOS, Web/PWA, Windows, Linux, macOS), Dart, Riverpod, go_router, Drift/SQLite, Isar, MethodChannel (Kotlin/Swift/C++), Android nativo in Java, Material 3.</p>
+        </div>
+        <div class="skill-cell">
+          <h3>Backend &amp; database</h3>
+          <p>Python (FastAPI), PHP (REST API, CRON, JWT), Node.js/TypeScript (Cloud Functions), C#/.NET, SQL Server, MySQL, Redis, Firebase (Auth, Firestore), Supabase.</p>
+        </div>
+        <div class="skill-cell">
+          <h3>AI / LLM</h3>
+          <p>Google Gemini, DeepSeek, OpenRouter, Ollama; layer di astrazione multi-provider, prompt engineering, orchestrazione multi-agente, sintesi vocale e media generativi.</p>
+        </div>
+        <div class="skill-cell">
+          <h3>Fiscale &amp; hardware POS</h3>
+          <p>FatturaPA/SdI, Registratore Telematico (RT), scontrino dematerializzato; stampanti fiscali/ESC-POS, terminali EFT-POS, cash keeper, display cliente via seriale/RS232, TCP, USB; MQTT.</p>
+        </div>
+        <div class="skill-cell">
+          <h3>DevOps, CI/CD &amp; testing</h3>
+          <p>Jenkins + SonarQube, GitHub Actions, Docker, deploy self-hosted (Raspberry Pi, systemd), packaging MSIX/.deb/APK; Appium, Espresso, Silk, TestRail.</p>
+        </div>
+        <div class="skill-cell">
+          <h3>Sicurezza &amp; OAuth</h3>
+          <p>OAuth1 con firma HMAC-SHA1 implementata a mano, OAuth2, flussi CAS, MFA/2FA, certificate pinning, secure storage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-inner reveal">
+      <p class="mono">Aperto a nuove opportunità</p>
+      <h2>Costruiamo qualcosa che vada in produzione.</h2>
+      <p class="contact-sub">
+        Un prodotto cross-platform, un'integrazione fiscale o un workflow con l'AI —
+        ne parlo volentieri, in italiano o in inglese.
+      </p>
+      <div class="contact-cta">
+        <a class="btn btn-solid" href="mailto:cristi.perciun@gmail.com">cristi.perciun@gmail.com</a>
+        <a class="btn" href="https://github.com/CristiPerciun" target="_blank" rel="noopener">GitHub <span class="arrow">↗</span></a>
+      </div>
+      <div class="contact-meta">
+        <span>Parma, Italia</span>
+        <span>(+39) 339 2570045</span>
+        <span>IT · EN · RO · UA/RU</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span>© 2026 Cristian Perciun</span>
+    <span>Fatto a mano in HTML/CSS/JS puro — niente framework, niente tracker.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer   = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  /* ---------- scroll reveal ---------- */
+  var revealEls = document.querySelectorAll(".reveal");
+  if (!reducedMotion && "IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* ---------- 3D tilt + light sheen ---------- */
+  if (!reducedMotion && finePointer){
+    var MAX = 5; // degrees
+    document.querySelectorAll("[data-tilt]").forEach(function(card){
+      var raf = null;
+      var px = 0, py = 0;
+
+      function apply(){
+        raf = null;
+        var rx = (0.5 - py) * MAX * 2;
+        var ry = (px - 0.5) * MAX * 2;
+        card.style.transform =
+          "perspective(900px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg)";
+        card.style.setProperty("--mx", (px * 100).toFixed(1) + "%");
+        card.style.setProperty("--my", (py * 100).toFixed(1) + "%");
+      }
+
+      card.addEventListener("pointerenter", function(){
+        card.classList.add("is-live");
+      });
+
+      card.addEventListener("pointermove", function(ev){
+        var r = card.getBoundingClientRect();
+        px = (ev.clientX - r.left) / r.width;
+        py = (ev.clientY - r.top) / r.height;
+        if (!raf) raf = requestAnimationFrame(apply);
+      });
+
+      card.addEventListener("pointerleave", function(){
+        card.classList.remove("is-live");
+        if (raf){ cancelAnimationFrame(raf); raf = null; }
+        card.style.transform = "";
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
